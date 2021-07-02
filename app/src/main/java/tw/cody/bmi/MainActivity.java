@@ -3,7 +3,10 @@ package tw.cody.bmi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.DialogInterface;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -13,9 +16,9 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends Activity {
     private EditText cm, kgw;
-    private TextView figure, health, range;
+    private TextView figure, health, range, text;
     private RadioGroup group;
 
     @Override
@@ -29,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
         health = findViewById(R.id.health);
         group = findViewById(R.id.group);
         range = findViewById(R.id.range);
+        text = findViewById(R.id.text);
 
 
     }
@@ -64,57 +68,90 @@ public class MainActivity extends AppCompatActivity {
             if (group.getCheckedRadioButtonId() == R.id.men) {
                 if (bmi2 < 18.5) {
                     health.setText("男性,過輕");
+                    health.setTextColor(Color.parseColor("#828f35"));
+                    health.setTypeface(Typeface.DEFAULT_BOLD);
                     range.setText("BMI<18.5");
                 }
                 else if (18.5 <= bmi2 && bmi2 < 24) {
                     health.setText("男性,正常");
+                    health.setTextColor(Color.parseColor("#358f3f"));
+                    health.setTypeface(Typeface.DEFAULT_BOLD);
                     range.setText("18.5<=BMI<24");
                 }
                 else if (24 <= bmi2 && bmi2 < 27) {
                     health.setText("男性,過重");
+                    health.setTextColor(Color.parseColor("#8f3535"));
+                    health.setTypeface(Typeface.DEFAULT_BOLD);
                     range.setText("24<=BMI<27");
                 }
                 else if (27 <= bmi2 && bmi2 < 30) {
                     health.setText("男性,輕度肥胖");
+                    health.setTextColor(Color.parseColor("#8f3535"));
+                    health.setTypeface(Typeface.DEFAULT_BOLD);
                     range.setText("27 <= BMI < 30");
                 }
                 else if (30 <= bmi2 && bmi2 < 35) {
                     health.setText("男性,中度肥胖");
+                    health.setTextColor(Color.parseColor("#8f3535"));
+                    health.setTypeface(Typeface.DEFAULT_BOLD);
                     range.setText("30 <= BMI < 35");
                 }
                 else if (35 <= bmi2) {
                     health.setText("男性,重度肥胖");
+                    health.setTextColor(Color.parseColor("#8f3535"));
+                    health.setTypeface(Typeface.DEFAULT_BOLD);
                     range.setText("35 <= BMI");
                 }
             }else if (group.getCheckedRadioButtonId() == R.id.women) {
                     if (bmi2 < 18.5) {
                         health.setText("女性,過輕");
+                        health.setTextColor(Color.parseColor("#828f35"));
+                        health.setTypeface(Typeface.DEFAULT_BOLD);
                         range.setText("BMI<18.5");
                     }
                     else if (18.5 <= bmi2 && bmi2 < 24) {
                         health.setText("女性,正常");
+                        health.setTextColor(Color.parseColor("#358f3f"));
+                        health.setTypeface(Typeface.DEFAULT_BOLD);
                         range.setText("18.5<=BMI<24");
                     }
                     else if (24 <= bmi2 && bmi2 < 27) {
                         health.setText("女性,過重");
+                        health.setTextColor(Color.parseColor("#8f3535"));
+                        health.setTypeface(Typeface.DEFAULT_BOLD);
                         range.setText("24<=BMI<27");
                     }
                     else if (27 <= bmi2 && bmi2 < 30) {
                         health.setText("女性,輕度肥胖");
+                        health.setTextColor(Color.parseColor("#8f3535"));
+                        health.setTypeface(Typeface.DEFAULT_BOLD);
                         range.setText("27 <= BMI < 30");
                     }
                     else if (30 <= bmi2 && bmi2 < 35) {
                         health.setText("女性,中度肥胖");
+                        health.setTextColor(Color.parseColor("#8f3535"));
+                        health.setTypeface(Typeface.DEFAULT_BOLD);
                         range.setText("30 <= BMI < 35");
                     }
                     else if (35 <= bmi2) {
                         health.setText("女性,重度肥胖");
+                        health.setTextColor(Color.parseColor("#8f3535"));
+                        health.setTypeface(Typeface.DEFAULT_BOLD);
                         range.setText("35 <= BMI");
                     }
                 }
-                group.clearCheck();
-                cm.setText("");
-                kgw.setText("");
+            text.setText("");
+            if ( bmi2 < 18.5 || bmi2 > 24) {
+                double among = Math.round(18.5*h*h*10);
+                double among1 = among/10;
+                double among2 = Math.round(24*h*h*10);
+                double among3 = among2/10;
+                text.setText("您適中的體重是:" +among1 + "~"  + among3 );
+            }
+
+            group.clearCheck();
+            cm.setText("");
+            kgw.setText("");
         }
     }
 
